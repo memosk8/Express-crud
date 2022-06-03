@@ -1,0 +1,13 @@
+{{#if error}}  <!-- Recorre el arrglo y manda las alertas por medio del script de abajo -->
+<div class="alert alert-danger alert-dismissible fade show" role="alert">
+ {{error}}
+  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">&times</button>
+</div>
+{{/if}}
+
+{{#each errors}}  <!-- Recorre el arrglo y manda las alertas por medio del script de abajo -->
+<div class="alert alert-danger alert-dismissible fade show" role="alert">
+ {{text}}
+  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">&times</button>
+</div>
+{{/each}}
