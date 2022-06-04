@@ -8,50 +8,50 @@ router.get('/users/signup', (req, res) => {
     res.render('users/signup');
 });
 
-router.post('/users/signin', passport.authenticate('local',{
-    successRedirect:'/notes',
-    failureRedirect:'/users/signin',
+router.post('/users/signin', passport.authenticate('local', {
+    successRedirect: '/notes',
+    failureRedirect: '/users/signin',
     failureFlash: true
 }));
 
-router.post('/users/signup', async(req, res)=>{
+router.post('/users/signup', async (req, res) => {
     //console.log(req.body);
     //res.send('ok');
-    const {nombre,email,password, c_password}=req.body;
+    const { nombre, email, password, c_password } = req.body;
     const errors = [];
     //nombre no esta vacio
     //correo no esta vacio
     //contraseña no esta vacia
     //contraseña es mayor a 4 digitos
     //Contraseñas coincidan
-    if(nombre <=0){
-        errors.push({text:'Inserte un nombre'});
+    if (nombre <= 0) {
+        errors.push({ text: 'Inserte un nombre' });
     }
-    if(email <=0){
-        errors.push({text:'Inserte un correo'});
+    if (email <= 0) {
+        errors.push({ text: 'Inserte un correo' });
     }
-    if(password <=0){
-        errors.push({text:'Inserte una contraseña'});
+    if (password <= 0) {
+        errors.push({ text: 'Inserte una contraseña' });
     }
-    if(password !=c_password){
-        errors.push({text:'Las contraseñas no coinciden'});
+    if (password != c_password) {
+        errors.push({ text: 'Las contraseñas no coinciden' });
     }
-    if(password.length < 4){
-        errors.push({text:'La contraseña debe ser mayor a 4 digitos'});
+    if (password.length < 4) {
+        errors.push({ text: 'La contraseña debe ser mayor a 4 digitos' });
     }
-    if(errors.length >0){
-        res.render('users/signup', {errors, nombre, email, password, c_password});
-    }else{
+    if (errors.length > 0) {
+        res.render('users/signup', { errors, nombre, email, password, c_password });
+    } else {
         //console.log(req.body);
         //res.send("ok");
-        const correoUser = await User.findOne({email:email});
-        if(correoUser){
+        const correoUser = await User.findOne({ email: email });
+        if (correoUser) {
             console.log('ok');
             req.flash('error_msg', 'El correo ya fue registrado');
             res.redirect('signin');
-            
+
         }
-        const newUser = new User({nombre, email, password, c_password});
+        const newUser = new User({ nombre, email, password, c_password });
         newUser.password = await newUser.encryptPassword(password);
         await newUser.save();
         console.log('ok');
@@ -60,10 +60,10 @@ router.post('/users/signup', async(req, res)=>{
     }
 })
 
-router.get("/users/logout", (req,res) => {
+router.get("/users/logout", (req, res) => {
     req.logOut();
     res.redirect('/');
-    
+
 })
 
 module.exports = router;

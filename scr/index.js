@@ -2,7 +2,7 @@ const express = require('express');
 const path = require('path');
 const exphbs = require('express-handlebars');
 const methoOverride = require('method-override');   // permite utilizar metodos http
-const session = require('express-session');               
+const session = require('express-session');
 const flash = require('connect-flash');             // es utilizado para guardar variables de sesion
 const res = require('express/lib/response');
 const passport = require('passport');
@@ -34,7 +34,7 @@ app.use(passport.initialize());
 app.use(passport.session());
 app.use(flash());   // mensajes por defecto en sesión
 
-    //variables globales
+//variables globales
 app.use((req, res, next) => {
     res.locals.success_msg = req.flash('success_msg');  // mensaje OK
     res.locals.error_msg = req.flash('error_msg');      // mensaje error
@@ -43,15 +43,15 @@ app.use((req, res, next) => {
     next();
 });
 
-    //rutas
+//rutas
 app.use(require('./routes/index'));
 app.use(require('./routes/notes'));
 app.use(require('./routes/users'));
 
-    //archivos estaticos / carpeta pública
+//archivos estaticos / carpeta pública
 app.use(express.static(path.join(__dirname, 'public')));
 
-    //servidor arriba!!
+//servidor arriba!!
 app.listen(app.get('port'), () => {
     console.log('Servidor arriba', app.get('port'));
 })
