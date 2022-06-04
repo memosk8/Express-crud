@@ -30,7 +30,7 @@ app.use(methodOverride('_method'));
 app.use(session({
   secret: 'myappsecret',
   resave: true,
-  saveUninitialized: true
+  saveUninitialized: true 
 }));
 app.use(flash()); // mensajes de manera global para todo el projecto
 app.use((req, res, next) => {

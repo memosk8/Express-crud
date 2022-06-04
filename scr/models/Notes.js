@@ -5,7 +5,7 @@ const NotesSchema = new Schema({
     titulo: { type: String, required: true },
     descripcion: { type: String, required: true },
     fecha: { type: Date, default: Date.now },
-    user: { type: String } // guarda el id del user
+    user: { type: String }
 });
 
 module.exports = mongoose.model('Note', NotesSchema);
