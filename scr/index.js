@@ -4,7 +4,6 @@ const exphbs = require('express-handlebars');
 const methoOverride = require('method-override');   // permite utilizar metodos http
 const session = require('express-session');
 const flash = require('connect-flash');             // es utilizado para guardar variables de sesion
-const res = require('express/lib/response');
 const passport = require('passport');
 
 //Inicializar
