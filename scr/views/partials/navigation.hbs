@@ -9,14 +9,16 @@
       <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav">
           <li class="nav-item">
+            {{#if user}}
             <a class="navbar-brand text-secondary border border-success px-5 py-0 rounded" href="/music">Scrap Radio</a>
+            {{/if}}
           </li>
         </ul>
         <ul class="navbar-nav ml-auto">
           {{#if user}}
           
           <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle text-white bg-secondary font-weight-bold" href="#" id="navbarDropdown"
+            <a class="nav-link dropdown-toggle text-white bg-secondary font-weight-light rounded" href="#" id="navbarDropdown"
               role="button" data-bs-toggle="dropdown" aria-expanded="false">
               Acciones
             </a>
