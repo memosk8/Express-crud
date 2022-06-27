@@ -6,28 +6,30 @@
          <div class="card-body ">
             <h4 class="card-title d-flex justify-content-between aling-items-center">
                {{ title }}
-               <a href="music/edit/{{_id}}"><i class="fas fa-edit"></i></a>
+               <form action="/music/delete/{{_id}}?_method=DELETE" method="POST" class="container text-right mr-3">
+                  <input type="hidden" name="_method" value="delete">
+                  <button class="btn btn-danger btn-md font-weight-bold mr-3">Eliminar</button>
+               </form>
+               <a href="music/edit/{{_id}}"><i class="fas fa-edit mr-3"></i></a>
             </h4>
             <ul>
                {{#each content}}
                <li class="list-group-item py-1 border  border-light">{{this}}</li>
                {{/each}}
             </ul>
-            <form action="/music/delete/{{_id}}?_method=DELETE" method="POST" class="container-fluid text-right">
-               <input type="hidden" name="_method" value="delete">
-               <button class="btn btn-danger btn-md font-weight-bold">Eliminar</button>
-            </form>
+
          </div>
       </div>
 
       {{else}}
       {{!-- admin option --}}
-      {{!-- <div class="card mx-auto">
-         <div class="card-body">
-            <p class="lead">No hay notas</p>
-            <a href="/notes/add" class="btn btn-success btn-block">Crear una nota nueva</a>
+      <div class="card mx-auto">
+         <div class="card-body text-center">
+            <p class="lead ">No hay categorías </p>
+            <a href="/music/add" class="btn btn-success font-weight-bold">Crear nueva categoria &nbsp;<i
+                  class="fas fa-plus text-dark"></i></a>
          </div>
-      </div> --}}
+      </div>
       {{/each}}
    </div>
 
