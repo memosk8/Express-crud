@@ -1,5 +1,5 @@
 // conexion a mongodb
 const mongoose = require('mongoose')
-mongoose.connect('mongodb://127.0.0.1:27017/notes_db_app')
-  .then(db => console.log("Base de datos conectada"))
+mongoose.connect('mongodb+srv://memosk8:Password123@cluster0.nuhhssx.mongodb.net/tunein?retryWrites=true&w=majority')
+  .then(() => console.log("\n-- Base de datos conectada --\n"))
   .catch(err => console.log(err));
