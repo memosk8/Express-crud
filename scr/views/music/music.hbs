@@ -2,7 +2,7 @@
 
    <div class="container">
       {{#each categories}}
-      <div class="card  mb-1 mx-1">
+      <div class="card mb-3 rounded z-depth-1">
          <div class="card-body ">
             <h4 class="card-title d-flex justify-content-between aling-items-center">
                {{ title }}
@@ -10,12 +10,12 @@
             </h4>
             <ul>
                {{#each content}}
-               <li>{{this}}</li>
+               <li class="list-group-item py-1 border  border-light">{{this}}</li>
                {{/each}}
             </ul>
-            <form action="/music/delete/{{_id}}?_method=DELETE" method="POST">
+            <form action="/music/delete/{{_id}}?_method=DELETE" method="POST" class="container-fluid text-right">
                <input type="hidden" name="_method" value="delete">
-               <button class="btn btn-danger btn.block btn-sm">Eliminar</button>
+               <button class="btn btn-danger btn-md font-weight-bold">Eliminar</button>
             </form>
          </div>
       </div>
