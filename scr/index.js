@@ -1,7 +1,7 @@
 const express = require('express');
 const path = require('path');
 const exphbs = require('express-handlebars');
-const methoOverride = require('method-override');   // permite utilizar metodos http
+const methodOverride = require('method-override');   // permite utilizar metodos http
 const session = require('express-session');
 const flash = require('connect-flash');             // es utilizado para guardar variables de sesion
 const passport = require('passport');
@@ -22,7 +22,7 @@ app.engine('.hbs', exphbs.engine({                        // Metodo para crear u
 }));
 app.set('view engine', '.hbs');                           // motor de plantillas handlebars
 app.use(express.urlencoded({ extended: false }))
-app.use(methoOverride('_method'));
+app.use(methodOverride('_method'));
 app.use(session({
     secret: 'myappsecret',
     resave: true,
@@ -46,6 +46,7 @@ app.use((req, res, next) => {
 app.use(require('./routes/index'));
 app.use(require('./routes/notes'));
 app.use(require('./routes/users'));
+app.use(require('./routes/music'))
 
 //archivos estaticos / carpeta pública
 app.use(express.static(path.join(__dirname, 'public')));
