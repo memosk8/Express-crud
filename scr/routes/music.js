@@ -17,11 +17,18 @@ router.get('/music/edit/:id', isAuthenticated, async (req, res) => {
 //actualizar las categorias en la base de datos
 router.put('/music/edit-category/:id', isAuthenticated, async (req, res) => {
    const { title } = req.body;
-   const content = Object.entries(req.body)
-   content.slice(0,1)
-   console.log(content)
-   await Category.findByIdAndUpdate(req.params.id, { title });
-   req.flash('success_msg', 'Editado correctamente');
+   const content = []
+   const response = Object.entries(req.body)
+   // se omite el metodo de la solicitud
+   response.shift();
+   // y y el titulo de la seccion
+   response.shift();
+   response.forEach(element => {
+      content.push(element[1])
+   });
+
+   await Category.findByIdAndUpdate(req.params.id, { title, content });
+   req.flash('success_msg', 'Categoria editada');
    res.redirect('/music');
 });
 
