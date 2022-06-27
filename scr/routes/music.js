@@ -8,13 +8,42 @@ router.get('/music', isAuthenticated, async (req, res) => {
    res.render('music/music', { categories });
 });
 
+router.get('/music/add', isAuthenticated, (req, res) => { //muestra la vista del formulario 
+   res.render('music/new-category');
+});
+
+router.post('/notes/new-category', isAuthenticated, async (req, res) => {
+
+   const { title, content } = req.body;
+   const errors = []; // guardar los errores que se generen
+   if (!titulo) {
+      errors.push({ text: 'Por favor ingrese un valor en el titulo' }); //Verifica si el campo esta vacio manda llamar el error
+   }
+   if (!descripcion) {
+      errors.push({ text: 'Favor de ingresar el valor' }); // verifica si la descripcion esta vacia y manda llamar el error
+   }
+   if (errors.length > 0) {
+      res.render('notes/new-notes', {
+         errors,                         // recorre el arreglo para verificar que no haya errores
+         titulo,
+         descripcion
+      });
+   } else {
+      // res.send('Todo bien, con el futuro de mexico');
+      const NewNotes = new Notes({ titulo, descripcion });
+      NewNotes.user = req.user.id;
+      await NewNotes.save(); //para indicar que esa accion la a¿hara de manera asincrona 
+      req.flash('success_msg', 'Agregada correctamente');
+      res.redirect('/notes');
+   }
+});
+
 router.get('/music/edit/:id', isAuthenticated, async (req, res) => {
-   //consulta a la base de datos
    const category = await Category.findById(req.params.id).lean();
    res.render('music/edit-category', { category })
 });
 
-//actualizar las categorias en la base de datos
+//actualizar la categoria en la base de datos
 router.put('/music/edit-category/:id', isAuthenticated, async (req, res) => {
    const { title } = req.body;
    const content = []

@@ -1,12 +1,20 @@
 <div class="row">
 
    <div class="container">
+      <div class="pb-4 text-left">
+            <a href="/music/add" class="btn btn-success font-weight-bold">Crear nueva categoria &nbsp;
+               <i class="fas fa-plus text-dark"></i>
+            </a>
+         </div>
+      <div class="card mx-auto">
+         
+      </div>
       {{#each categories}}
       <div class="card mb-3 rounded z-depth-1">
          <div class="card-body ">
-            <h4 class="card-title d-flex justify-content-between aling-items-center">
+            <h4 class="card-title d-flex justify-content-between aling-items-center px-4 mb-2">
                {{ title }}
-               <form action="/music/delete/{{_id}}?_method=DELETE" method="POST" class="container text-right mr-3">
+               <form action="/music/delete/{{_id}}?_method=DELETE" method="POST" class="container text-right mx-3">
                   <input type="hidden" name="_method" value="delete">
                   <button class="btn btn-danger btn-md font-weight-bold mr-3">Eliminar</button>
                </form>
