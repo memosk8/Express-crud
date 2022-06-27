@@ -7,7 +7,6 @@ print(f'\n-- GET : {path} --\n')
 html_doc = requests.get(path)
 soup = BeautifulSoup(html_doc.content, 'lxml')
 
-
 # obtener secciones completas (titulo, contenido)
 category_containers = soup.find_all(
     'div', 'container-items-module__containerItem___OhnxW')

@@ -32,4 +32,11 @@ router.put('/music/edit-category/:id', isAuthenticated, async (req, res) => {
    res.redirect('/music');
 });
 
+//eliminar los datos
+router.delete('/music/delete/:id', isAuthenticated, async (req, res) => {
+   await Category.findByIdAndDelete(req.params.id);
+   req.flash('success_msg', 'Categoria Eliminada');
+   res.redirect('/music');
+});
+
 module.exports = router;
