@@ -1,0 +1,34 @@
+<div class="row">
+
+   <div class="container">
+      {{#each categories}}
+      <div class="card  mb-1 mx-1">
+         <div class="card-body ">
+            <h4 class="card-title d-flex justify-content-between aling-items-center">
+               {{ title }}
+               <a href="music/edit/{{_id}}"><i class="fas fa-edit"></i></a>
+            </h4>
+            <ul>
+               {{#each content}}
+               <li>{{this}}</li>
+               {{/each}}
+            </ul>
+            <form action="/notes/delete/{{_id}}?_method=DELETE" method="POST">
+               <input type="hidden" name="_method" value="delete">
+               <button class="btn btn-danger btn.block btn-sm">Eliminar</button>
+            </form>
+         </div>
+      </div>
+
+      {{else}}
+      {{!-- admin option --}}
+      {{!-- <div class="card mx-auto">
+         <div class="card-body">
+            <p class="lead">No hay notas</p>
+            <a href="/notes/add" class="btn btn-success btn-block">Crear una nota nueva</a>
+         </div>
+      </div> --}}
+      {{/each}}
+   </div>
+
+</div>
