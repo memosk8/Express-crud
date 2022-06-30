@@ -47,12 +47,12 @@ router.get('/music/edit/:id', isAuthenticated, async (req, res) => {
 router.put('/music/edit-category/:id', isAuthenticated, async (req, res) => {
    const { title } = req.body;
    const content = []
-   const response = Object.entries(req.body)
+   const request = Object.entries(req.body)
    // se omite el metodo de la solicitud
-   response.shift();
+   request.shift();
    // y y el titulo de la seccion
-   response.shift();
-   response.forEach(element => {
+   request.shift();
+   request.forEach(element => {
       content.push(element[1])
    });
 
