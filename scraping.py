@@ -1,3 +1,5 @@
+import datetime
+from types import NoneType
 from bs4 import BeautifulSoup
 import requests
 import pymongo
@@ -19,6 +21,8 @@ subcontain_classes = ['guide-item-module__guideItemTitleMultiLine___ddgqh guide-
 categories = []
 for container in category_containers:
     section = {}
+    section['created_at'] = datetime.datetime.now()
+    section['updated_at'] = None
     # titulo de la seccion
     if(container.find('div', 'container-title-module__titleHeader___WUX8D')):
         section['title'] = container.find(

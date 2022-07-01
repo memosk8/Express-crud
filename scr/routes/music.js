@@ -2,12 +2,19 @@ const router = require('express').Router();
 const { isAuthenticated } = require('../helpers/auth');
 const Category = require('../models/Categories');
 
-Category.CategoriesSchema.add({date: Date})
+Category.CategoriesSchema.add({ date: Date })
 
 // listado de categorías tunein
 router.get('/music', isAuthenticated, async (req, res) => {
    console.log(`\n Solicitud en ${req.url}`)
    const categories = await Category.find({}).lean();
+   categories.forEach((cat) => {
+      cat.content.forEach((elem) => {
+         if (elem.length > 200) {
+            elem = elem.substr(0,100)
+         }
+      })
+   })
    res.render('music/music', { categories });
 });
 
@@ -18,13 +25,11 @@ router.get('/music/add', isAuthenticated, (req, res) => { //muestra la vista del
 
 // obtención de los datos y creación de una nueva categoría
 router.post('/music/new-category', isAuthenticated, async (req, res) => {
-   const {title} = req.body;
+   const { title } = req.body;
    const errors = [];
    const content = [];
    const request = Object.entries(req.body)
-   // se omite el metodo de la solicitud
-   request.shift();
-   // y y el titulo de la seccion
+   // el primer elemento es el tipo de solicitud y se elimina
    request.shift();
    // se obtienen todos los elementos de la nueva categoría 
    request.forEach(element => {
@@ -44,7 +49,7 @@ router.post('/music/new-category', isAuthenticated, async (req, res) => {
          content
       });
    } else {
-      const category = new Category({ title, content });
+      const category = new Category({ created_at: new Date().toISOString(), updated_at: '', title, content });
       category.date = new Date();
       await category.save();
       req.flash('success_msg', 'Categoría Agregada');
@@ -71,7 +76,7 @@ router.put('/music/edit-category/:id', isAuthenticated, async (req, res) => {
       content.push(element[1])
    });
 
-   await Category.findByIdAndUpdate(req.params.id, { title, content });
+   await Category.findByIdAndUpdate(req.params.id, { updated_at: new Date().toISOString(), title, content });
    req.flash('success_msg', 'Categoria editada');
    res.redirect('/music');
 });
