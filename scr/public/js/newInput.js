@@ -7,6 +7,6 @@ const newInput = () => {
    document.querySelector("#inputContainer").appendChild(nodeComponent)
    i++;
 }
-
+// borrar padre principal del boton
 const delInput = (e) => e.parentNode.parentNode.remove();
 
