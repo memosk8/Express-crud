@@ -1,44 +1,53 @@
 <div class="row">
 
-   <div class="container">
-      <div class="pb-4 text-left">
-            <a href="/music/add" class="btn btn-success font-weight-bold">Crear nueva categoria &nbsp;
-               <i class="fas fa-plus text-dark"></i>
-            </a>
-         </div>
-      <div class="card mx-auto">
-         
-      </div>
-      {{#each categories}}
-      <div class="card mb-3 rounded z-depth-1">
-         <div class="card-body ">
-            <h4 class="card-title d-flex justify-content-between aling-items-center px-4 mb-2">
-               {{ title }}
-               <form action="/music/delete/{{_id}}?_method=DELETE" method="POST" class="container text-right mx-3">
-                  <input type="hidden" name="_method" value="delete">
-                  <button class="btn btn-danger btn-md font-weight-bold mr-3">Eliminar</button>
-               </form>
-               <a href="music/edit/{{_id}}"><i class="fas fa-edit mr-3"></i></a>
-            </h4>
-            <ul>
-               {{#each content}}
-               <li class="list-group-item py-1 border  border-light">{{this}}</li>
-               {{/each}}
-            </ul>
+  <div class="container">
+    <div class="pb-4 text-left">
+      <a href="/music/add" class="btn btn-success font-weight-bold">Crear nueva categoria &nbsp;
+        <i class="fas fa-plus text-dark"></i>
+      </a>
+    </div>
 
-         </div>
-      </div>
+    {{#each categories}}
+    <div class="card rounded px-4 mb-3">
+      <div class="card-body row ">
+        <h4 class="card-title m-1 py-1 col-4 border rounded border-info text-center bg-light">
+          {{ title }}
+        </h4>
+        <h6 class="card-title m-1 py-1 col-5 border rounded border-dark text-center">
+          {{#if updated_at}}
+          Modificado: {{updated_at}}
+          {{else}}
+          Creado: {{created_at}}
+          {{/if}}
+        </h6>
+        &nbsp;
+        <a href="music/edit/{{_id}}"
+          class="btn btn-primary btn-md font-weight-bold rounded border-primary m-auto">&nbsp;Editar &nbsp;
+          <i class="fas fa-edit"></i>
+        </a>
+        <form action="/music/delete/{{_id}}?_method=DELETE" method="POST" class="m-auto">
+          <input type="hidden" name="_method" value="delete">
+          <button class="btn btn-danger btn-md font-weight-bold m-auto">Eliminar &Xscr;</button>
+        </form>
+        <ul class="mt-2 mr-1 card-text">
+          {{#each content}}
+          <li class="list-group-item py-1 border  border-light">{{this}}</li>
+          {{/each}}
+        </ul>
 
-      {{else}}
-      {{!-- admin option --}}
-      <div class="card mx-auto">
-         <div class="card-body text-center">
-            <p class="lead ">No hay categorías </p>
-            <a href="/music/add" class="btn btn-success font-weight-bold">Crear nueva categoria &nbsp;<i
-                  class="fas fa-plus text-dark"></i></a>
-         </div>
       </div>
-      {{/each}}
-   </div>
+    </div>
+
+    {{else}}
+    {{!-- admin option --}}
+    <div class="card mx-auto">
+      <div class="card-body text-center">
+        <p class="lead ">No hay categorías </p>
+        <a href="/music/add" class="btn btn-success font-weight-bold">Crear nueva categoria &nbsp;<i
+            class="fas fa-plus text-dark"></i></a>
+      </div>
+    </div>
+    {{/each}}
+  </div>
 
 </div>
