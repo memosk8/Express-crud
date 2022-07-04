@@ -1,6 +1,7 @@
 const router = require('express').Router();
 const { isAuthenticated } = require('../helpers/auth');
 const Category = require('../models/Categories');
+const session = require('express-session');
 
 Category.CategoriesSchema.add({ date: Date })
 
@@ -11,11 +12,13 @@ router.get('/music', isAuthenticated, async (req, res) => {
    categories.forEach((cat) => {
       cat.content.forEach((elem) => {
          if (elem.length > 200) {
-            elem = elem.substr(0,100)
+            elem = elem.substr(0, 100)
          }
       })
    })
-   res.render('music/music', { categories });
+   admin = session.admin
+   console.log(admin)
+   res.render('music/music', { categories, admin });
 });
 
 // formulario nueva categoría
@@ -85,6 +88,7 @@ router.put('/music/edit-category/:id', isAuthenticated, async (req, res) => {
 router.delete('/music/delete/:id', isAuthenticated, async (req, res) => {
    await Category.findByIdAndDelete(req.params.id);
    req.flash('success_msg', 'Categoria Eliminada');
+   req.session.destroy();
    res.redirect('/music');
 });
 
