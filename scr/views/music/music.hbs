@@ -8,12 +8,13 @@
     </div>
 
     {{#each categories}}
+
     <div class="card rounded px-4 mb-3">
-      <div class="card-body row ">
-        <h4 class="card-title m-1 py-1 col-4 border rounded border-info text-center bg-light">
+      <div class="card-body row d-flex">
+        <h4 class="card-title m-2 py-1 col-12 border rounded border-info text-center bg-light ">
           {{ title }}
         </h4>
-        <h6 class="card-title m-1 py-1 col-5 border rounded border-dark text-center">
+        <h6 class="card-title m-1 py-1 col-12 col-lg-6 col-md-6 border rounded border-dark text-center">
           {{#if updated_at}}
           Modificado: {{updated_at}}
           {{else}}
@@ -22,10 +23,10 @@
         </h6>
         &nbsp;
         <a href="music/edit/{{_id}}"
-          class="btn btn-primary btn-md font-weight-bold rounded border-primary m-auto">&nbsp;Editar &nbsp;
+          class="btn btn-primary btn-md font-weight-bold rounded border-primary m-3">&nbsp;Editar &nbsp;
           <i class="fas fa-edit"></i>
         </a>
-        <form action="/music/delete/{{_id}}?_method=DELETE" method="POST" class="m-auto">
+        <form action="/music/delete/{{_id}}?_method=DELETE" method="POST" class="m-3">
           <input type="hidden" name="_method" value="delete">
           <button class="btn btn-danger btn-md font-weight-bold m-auto">Eliminar &Xscr;</button>
         </form>
@@ -43,13 +44,12 @@
     <div class="card mx-auto">
       <div class="card-body text-center">
         <p class="lead ">No hay categorías </p>
-        <a href="/music/add" class="btn btn-success font-weight-bold">Crear nueva categoria &nbsp;<i
-            class="fas fa-plus text-dark"></i></a>
+
       </div>
     </div>
     {{/each}}
 
-    {{else}}
+  {{else}}
   </div>
   <div class="container">
     {{!-- <div class="pb-4 text-left">
@@ -93,9 +93,7 @@
     {{!-- admin option --}}
     <div class="card mx-auto">
       <div class="card-body text-center">
-        <p class="lead ">No hay categorías </p>
-        <a href="/music/add" class="btn btn-success font-weight-bold">Crear nueva categoria &nbsp;<i
-            class="fas fa-plus text-dark"></i></a>
+        <h3 class="lead ">No hay categorías </h3>
       </div>
     </div>
     {{/each}}

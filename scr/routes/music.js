@@ -88,7 +88,6 @@ router.put('/music/edit-category/:id', isAuthenticated, async (req, res) => {
 router.delete('/music/delete/:id', isAuthenticated, async (req, res) => {
    await Category.findByIdAndDelete(req.params.id);
    req.flash('success_msg', 'Categoria Eliminada');
-   req.session.destroy();
    res.redirect('/music');
 });
 
