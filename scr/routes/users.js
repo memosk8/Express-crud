@@ -50,7 +50,7 @@ router.post('/users/signup', async (req, res) => {
       await newUser.save();
       console.log('-- New user created --');
       req.flash('success_msg', 'El registro fue exitoso');
-      res.redirect('signin');
+      res.redirect('/');
    }
 })
 
