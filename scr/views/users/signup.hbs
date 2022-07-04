@@ -1,31 +1,47 @@
-<div class="row">
-    <div class="col-md-4 mx-auto">
-        <div class="card">
-            <div class="card-header">
-                Registro de usuario
-            </div>
-            <div class="card-body">
-                <form action="/users/signup" method="POST">
-                <div class="form-group">
-                    <input type="text" class="form-control" name="nombre" placeholder="Nombre" value="{{nombre}}">
-                </div>
-                <div class="form-group">
-                    <input type="text" class="form-control" name="email" placeholder="Correo" value="{{email}}">
-                </div>
-                <div class="form-group">
-                    <input type="password" class="form-control" name="password" placeholder="Contraseña" value="{{password}}">
-                </div>
-                <div class="form-group">
-                    <input type="password" class="form-control" name="c_password" placeholder="Contraseña" value="{{c_password}}">
-                </div>
-                <input type="radio" value="admin">
-                <div class="form-group">
-                    <button class="btn btn-success btn-block btn-sm" type="submit">
-                        Registrarse
-                    </button>
-                </div>
-                </form>
-            </div>
-        </div>
-    </div>
+<div class="d-flex justify-content-center">
+	<div class="col-12 col-md-8 col-lg-6">
+		<div class="card ">
+			<h4 class="card-header">
+				Registro de usuario
+			</h4>
+			<div class="card-body">
+				<form action="/users/signup" method="POST">
+					<div class="form-group">
+						<input type="text" class="form-control" name="nombre" placeholder="Nombre" value="{{nombre}}">
+					</div>
+					<div class="form-group">
+						<input type="email" class="form-control" name="email" placeholder="Correo" value="{{email}}">
+					</div>
+					<div class="form-group">
+						<input type="password" class="form-control" name="password" placeholder="Contraseña" value="{{password}}">
+					</div>
+					<div class="form-group">
+						<input type="password" class="form-control" name="c_password" placeholder="Contraseña"
+							value="{{c_password}}">
+					</div>
+
+					<fieldset class="p-3 border rounded form-group">
+						<h5>Nivel:</h5>
+
+						<div class="px-4">
+							<input type="radio" id="huey" name="admin" value="1" >
+							<label for="huey">Admin</label>
+						</div>
+
+						<div class="px-4">
+							<input type="radio" id="dewey" name="admin" value="0" checked>
+							<label for="dewey">User</label>
+						</div>
+
+					</fieldset>
+
+					<div class="form-group">
+						<button class="btn btn-success btn-block border-primary btn-lg" type="submit">
+							Registrar
+						</button>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
 </div>
