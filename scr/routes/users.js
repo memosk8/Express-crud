@@ -16,7 +16,7 @@ router.post('/users/signin', passport.authenticate('local', {
 }));
 
 router.post('/users/signup', async (req, res) => {
-   const { nombre, email, password, c_password } = req.body;
+   const { nombre, email, password, c_password, admin } = req.body;
    const errors = [];
    if (nombre <= 0) {
       errors.push({ text: 'Inserte un nombre' });
@@ -30,8 +30,11 @@ router.post('/users/signup', async (req, res) => {
    if (password != c_password) {
       errors.push({ text: 'Las contraseñas no coinciden' });
    }
-   if (password.length < 4) {
+   if (password.length < 8) {
       errors.push({ text: 'La contraseña debe ser mayor a 4 digitos' });
+   }
+   if (admin < 0 && admin > 1) {
+      errors.push({ text: 'Tipo de usuario invalido XD' });
    }
    if (errors.length > 0) {
       res.render('users/signup', { errors, nombre, email, password, c_password });
@@ -42,7 +45,7 @@ router.post('/users/signup', async (req, res) => {
          req.flash('error_msg', 'El correo ya fue registrado');
          res.redirect('signin');
       }
-      const newUser = new User({ nombre, email, password, c_password, role });
+      const newUser = new User({ nombre, email, password, c_password, admin });
       newUser.password = await newUser.encryptPassword(password);
       await newUser.save();
       console.log('-- New user created --');
@@ -54,7 +57,7 @@ router.post('/users/signup', async (req, res) => {
 router.get("/users/logout", (req, res) => {
    req.logOut();
    res.redirect('/');
-
+   req.session.destroy();
 })
 
 module.exports = router;
