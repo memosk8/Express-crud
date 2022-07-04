@@ -8,6 +8,10 @@ passport.use(new LocalStrategy(
 	{ usernameField: 'email' },
 	async (email, password, done) => {
 		const user = await User.findOne({ email: email })
+		// se guarda el valor de admin en una variable de sesión
+		// para consultarla al momento de mostrar botones para el crud
+		// cuando admin == false solo se muestran los registros
+		// cuando admin == true se muestra el boton de agregar nueva categoria, editar y eliminar categoría
 		session.admin = user.admin;
 		if (!user) return done(null, false, { message: "El usuario no existe" })
 		else {
