@@ -1,10 +1,22 @@
 const router = require('express').Router();
 const User = require('../models/Users');
+const { isAuthenticated } = require('../helpers/auth');
 const passport = require('passport');
+const session = require('express-session')
+
+// vista de informacipon de usuario
+router.get('/users/userInfo', isAuthenticated, async (req, res) => {
+   const admin = session.admin
+   const username = session.username
+   const email = session.email
+   const date = session.date
+   res.render('users/userInfo', { admin, username, email, date })
+})
 
 router.get('/users/signin', (req, res) => {
    res.render('users/signin');
 });
+
 router.get('/users/signup', (req, res) => {
    res.render('users/signup');
 });
