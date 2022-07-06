@@ -3,8 +3,6 @@ const { isAuthenticated } = require('../helpers/auth');
 const Category = require('../models/Categories');
 const session = require('express-session');
 
-Category.CategoriesSchema.add({ date: Date })
-
 // listado de categorías tunein
 router.get('/music', isAuthenticated, async (req, res) => {
    console.log(`\n Solicitud en ${req.url}`)
@@ -16,14 +14,16 @@ router.get('/music', isAuthenticated, async (req, res) => {
          }
       })
    })
-   admin = session.admin
-   console.log(admin)
-   res.render('music/music', { categories, admin });
+   const admin = session.admin
+   const username = session.username
+   res.render('music/music', { categories, admin, username });
 });
 
 // formulario nueva categoría
-router.get('/music/add', isAuthenticated, (req, res) => { //muestra la vista del formulario 
-   res.render('music/new-category');
+router.get('/music/add', isAuthenticated, (req, res) => {
+   const admin = session.admin
+   const username = session.username
+   res.render('music/new-category', { admin, username });
 });
 
 // obtención de los datos y creación de una nueva categoría
