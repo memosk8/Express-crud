@@ -7,7 +7,7 @@ const UserSchema = new Schema({
     email: { type: String, required: true },
     password: { type: String, required: true },
     fecha: { type: Date, default: Date.now },
-    admin: { type: Boolean, default: false}
+    admin: { type: Number, default: 0}
 });
 
 //Cifrar las contraseñas

@@ -5,13 +5,14 @@ const session = require('express-session');
 
 //Estrategia de autenticacion
 passport.use(new LocalStrategy(
-	{ usernameField: 'email' },
+	{ email: 'email' },
 	async (email, password, done) => {
 		const user = await User.findOne({ email: email })
-		session.admin = user.admin;
+		// session.admin = user.admin;
 		session.email = user.email;
 		session.username = user.nombre;
 		session.date = user.fecha
+		session.admin = user.admin
 		if (!user) return done(null, false, { message: "El usuario no existe" })
 		else {
 			const match = await user.matchPassword(password)

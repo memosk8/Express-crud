@@ -4,7 +4,7 @@ const { isAuthenticated } = require('../helpers/auth');
 const passport = require('passport');
 const session = require('express-session')
 
-// vista de informacipon de usuario
+// vista de informacion de usuario
 router.get('/users/userInfo', isAuthenticated, async (req, res) => {
    const admin = session.admin
    const username = session.username

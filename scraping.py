@@ -51,9 +51,9 @@ categories.pop(2)
 mongo = pymongo.MongoClient('mongodb://memosk8:Password123@ac-yygcs2d-shard-00-00.nuhhssx.mongodb.net:27017,ac-yygcs2d-shard-00-01.nuhhssx.mongodb.net:27017,ac-yygcs2d-shard-00-02.nuhhssx.mongodb.net:27017/?ssl=true&replicaSet=atlas-ce6o63-shard-0&authSource=admin&retryWrites=true&w=majority')
 if(mongo):
     print("\n-- DB ok --\n")
-    scrap = mongo.tunein.categories
+    categoriesCollection = mongo.tunein.categories
 try:
-    scrap.insert_many(categories)
+    categoriesCollection.insert_many(categories)
     print(
         f'se insertaron {len(categories)} categorias de {path}')
 except pymongo.errors.ConnectionFailure as error:
