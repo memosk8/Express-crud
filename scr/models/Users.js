@@ -17,7 +17,7 @@ UserSchema.methods.encryptPassword = async (password) => {
     return hash;
 };
 
-//comparar las contraeñas cifradas
+//comparar las contraseñas cifradas
 UserSchema.methods.matchPassword = async function (password) {
     return await bcrypt.compare(password, this.password);
 };

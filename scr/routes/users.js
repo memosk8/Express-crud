@@ -43,7 +43,7 @@ router.post('/users/signup', async (req, res) => {
       errors.push({ text: 'Las contraseñas no coinciden' });
    }
    if (password.length < 8) {
-      errors.push({ text: 'La contraseña debe ser mayor a 4 digitos' });
+      errors.push({ text: 'La contraseña debe ser mayor a 8 digitos' });
    }
    if (admin < 0 && admin > 1) {
       errors.push({ text: 'Tipo de usuario invalido XD' });
@@ -62,7 +62,7 @@ router.post('/users/signup', async (req, res) => {
       await newUser.save();
       console.log('-- New user created --');
       req.flash('success_msg', 'El registro fue exitoso');
-      res.redirect('/');
+      //res.redirect('/');
    }
 })
 

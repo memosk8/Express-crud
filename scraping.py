@@ -3,6 +3,9 @@ from types import NoneType
 from bs4 import BeautifulSoup
 import requests
 import pymongo
+from dotenv import load_dotenv
+import os
+load_dotenv()
 
 path = 'https://tunein.com/radio/music/'
 print(f'\n-- GET : {path} --\n')
@@ -48,7 +51,7 @@ categories.pop(2)
 # local conection string
 # pymongo.MongoClient('mongodb://127.0.0.1')
 # cloud conection string
-mongo = pymongo.MongoClient('mongodb://memosk8:Password123@ac-yygcs2d-shard-00-00.nuhhssx.mongodb.net:27017,ac-yygcs2d-shard-00-01.nuhhssx.mongodb.net:27017,ac-yygcs2d-shard-00-02.nuhhssx.mongodb.net:27017/?ssl=true&replicaSet=atlas-ce6o63-shard-0&authSource=admin&retryWrites=true&w=majority')
+mongo = pymongo.MongoClient(os.getenv('MONGO_URI'))
 if(mongo):
     print("\n-- DB ok --\n")
     categoriesCollection = mongo.tunein.categories

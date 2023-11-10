@@ -5,6 +5,7 @@ const methodOverride = require('method-override');   // permite utilizar metodos
 const session = require('express-session');
 const flash = require('connect-flash');             // es utilizado para guardar variables de sesion
 const passport = require('passport');
+require('dotenv').config(); // dotent
 
 //Inicializar
 const app = express();
